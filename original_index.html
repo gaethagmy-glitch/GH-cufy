@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noor.t.Turkish — أزياء محجبات تركية راقية</title>
+<meta name="description" content="متجر نور للأزياء التركية الراقية — ملابس محجبات تركية أصيلة، توصيل لجميع أنحاء سوريا">
+<meta name="keywords" content="ملابس محجبات، أزياء تركية، عباءات تركية، فساتين محجبات، سوريا، دمشق">
+<meta name="author" content="Noor.t.Turkish">
+<meta property="og:title" content="Noor.t.Turkish — أزياء محجبات تركية راقية">
+<meta property="og:description" content="أزياء تركية راقية للمحجبة الواثقة — توصيل لكل سوريا">
+<meta property="og:image" content="https://i.ibb.co/bjnJw6JS/6025966982219369438-1.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/jpeg" href="https://i.ibb.co/bjnJw6JS/6025966982219369438-1.jpg">
+<link rel="apple-touch-icon" href="https://i.ibb.co/bjnJw6JS/6025966982219369438-1.jpg">
+<link href="https://i.ibb.co/YFhjr5wb/5821119118328317723.jpg" rel="stylesheet">
+<style>
+:root{
+  --rose:#C9908A;--rose-light:#E8C5BF;--rose-pale:#F5EAE7;
+  --ivory:#FAF5F0;--charcoal:#2C2420;--gold:#B8955A;
+  --text:#3D2B25;--muted:#9A7A72;
+}
+*{margin:0;padding:
+S, M, XL, 38...)" onkeydown="if(event.key==='Enter'){event.preventDefault();addNewSize()}">
+              <button onclick="addNewSize()">+ إضافة</button>
+            </div>
+            <p class="hint">يمكنك إضافة أي مقاس تريده. اضغط + أو Enter بعد كل مقاس.</p>
+          </div>
+          <!-- IMAGES -->
+          <div class="afg">
+            <label>صور المنتج (PNG, JPG)</label>
+            <div class="img-upload-area">
+              <input type="file" id="a-img-input" accept="image/*" multiple onchange="handleImgs(this)">
+              <p>📸 اضغطي هنا لرفع الصور<br><small>من المعرض أو الكاميرا — أكثر من صورة</small></p>
+            </div>
+            <div class="img-preview-wrap" id="a-img-preview"></div>
+            <p class="hint">أول صورة ستظهر كغلاف المنتج في المتجر.</p>
+          </div>
+          <div class="afg">
+            <label>التصنيف</label>
+            <select id="a-tag"><option value="">بدون تصنيف</option><option value="جديد">جديد</option><option value="الأكثر مبيعاً">الأكثر مبيعاً</option><option value="تخفيض">تخفيض</option></select>
+          </div>
+          <button class="a-save" onclick="addProd()">إضافة المنتج ✓</button>
+        </div>
+
+        <!-- PRODUCTS LIST -->
+        <div class="a-sec" id="a-prods">
+          <div id="a-prods-list"></div>
+        </div>
+
+        <!-- ORDERS -->
+        <div class="a-sec" id="a-orders">
+          <div id="a-orders-list"></div>
+        </div>
+
+      </div>
+    </di
+The output was truncated because it was too long. Use a more targeted query or a smaller range to get the information you need.
+      sizes: p.sizes||[],
+      tag: p.tag||'',
+      outOfStock: p.out_of_stock||false
+    }));
+  }
+  renderProds();
+  showLoading(false);
+}
+
+function showLoading(show){
+  const g=document.getElementById('products-grid');
+  if(show) g.innerHTML='<p style="color:var(--muted);text-align:center;grid-column:1/-1;padding:3rem">⏳ جاري تحميل المنتجات...</p>';
+}
+
+// ── RENDER PRODUCTS ──
+function renderProds(){
+  const g=document.getElementById('products-grid');
+  if(!products.length){ g.innerHTML='<p style="color:var(--muted);text-align:center;grid-column:1/-1;padding:3rem">لا توجد منتجات حالياً 🌸</p>'; return; }
+  g.innerHTML=products.map(p=>{
+    const disp = p.discount ? fmt(calcDiscounted(p.origPrice,p.discount)) : p.price;
+    const old  = p.discount ? `<del>${p.price}</del> ` : '';
+    return `
+    <div class="product-card${p.outOfStock?' prod-card-disabled':''}" onclick="${p.outOfStock?'':('openProd('+p.id+')')}">
+      <div class="prod-img-wrap">
+        <img src="${p.imgs[0]||''}" alt="${p.name}" loading="lazy" onerror="this.src='https://placehold.co/400x500/F5EAE7/C9908A?text=نور'">
+        ${p.tag?`<span class="prod-tag">${p.tag}</span>`:''}
+        ${p.discount?`<span class="prod-tag" style="top:auto;bottom:1rem;background:var(--gold)">-${p.discount}%</span>`:''}
+        ${p.outOfStock?`<div class="out-of-stock-badge"><span>نفذت الكمية</span></div>`:`
+  await db('product_ratings','POST',{ product_id: ratingProdId, stars: prodRating, comment, reviewer: name });
+  closeProdRating();
+  toast('🌸 شكراً على تقييمك!');
+}
+
+// ── مشاركة منتج ──
+function shareProduct(id){
+  const p = products.find(x=>x.id===id); if(!p) return;
+  const url = window.location.href.split('?')[0] + '?product=' + id;
+  if(navigator.share){
+    navigator.share({ title: p.name, text: p.name + ' — ' + p.price, url });
+  } else {
+    navigator.clipboard.writeText(url).then(()=>toast('✅ تم نسخ رابط المنتج'));
+  }
+}
+
+// ── مفضلة ──
+function toggleFav(id){
+  let favs = JSON.parse(localStorage.getItem('noor_favs')||'[]');
+  if(favs.includes(id)){ favs = favs.filter(x=>x!==id); toast('تم الإزالة من المفضلة'); }
+  else { favs.push(id); toast('❤️ تم الإضافة للمفضلة'); }
+  localStorage.setItem('noor_favs', JSON.stringify(favs));
+  renderProds();
+}
+function isFav(id){ return JSON.parse(localStorage.getItem('noor_favs')||'[]').includes(id); }
+
+// ── دارك مود ──
+// ── حماية من الطلب المزدوج ──
+let orderSubmitting = false;
+const _confirmOrder = confirmOrder;
+confirmOrder = async function(){
+  if(orderSubmitting){ toast('⏳ جاري معالجة طلبك...'); return; }
+  orderSubmitting = true;
+  try { await _confirmOrder(); } finally { setTimeout(()=>{ orderSubmitting=false; },3000); }
+};
+showLoading(true);
+loadProducts();
+</script>
+</body>
+</html>
+

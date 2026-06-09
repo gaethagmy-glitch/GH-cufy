@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noor.t.Turkish — أزياء محجبات تركية راقية</title>
+  
+  <meta name="description" content="متجر نور للأزياء التركية الراقية — ملابس محجبات تركية أصيلة، توصيل لجميع أنحاء سوريا">
+  <meta name="keywords" content="ملابس محجبات، أزياء تركية، عباءات تركية، فساتين محجبات، سوريا، دمشق">
+  <meta name="author" content="Noor.t.Turkish">
+  
+  <meta property="og:title" content="Noor.t.Turkish — أزياء محجبات تركية راقية">
+  <meta property="og:description" content="أزياء تركية راقية للمحجبة الواثقة — توصيل لكل سوريا">
+  <meta property="og:image" content="https://i.ibb.co/bjnJw6JS/6025966982219369438-1.jpg">
+  <meta property="og:type" content="website">
+  
+  <link rel="icon" type="image/jpeg" href="https://i.ibb.co/bjnJw6JS/6025966982219369438-1.jpg">
+  <link rel="apple-touch-icon" href="https://i.ibb.co/bjnJw6JS/6025966982219369438-1.jpg">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Supabase JS Client library CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav>
+    <div class="nav-brand" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <!-- Fixed vector SVG Logo -->
+      <svg class="nav-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100" height="100" fill="#C9908A" rx="50"/>
+        <circle cx="50" cy="50" r="28" fill="none" stroke="#FAF5F0" stroke-width="3"/>
+        <polyline points="40,64 40,36 60,64 60,36" fill="none" stroke="#FAF5F0" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="nav-logo-text">Noor<span>.</span>T<span>.</span>Turkish</span>
+    </div>
+    
+    <ul class="nav-links">
+      <li><a onclick="goto('products')">المجموعة</a></li>
+      <li><a onclick="goto('about')">قصتنا</a></li>
+      <li><a onclick="goto('features')">خدماتنا</a></li>
+      <li><a onclick="goto('contact')">تواصلي</a></li>
+    </ul>
+    
+    <div class="nav-actions">
+      <!-- Theme Toggle Button -->
+      <button class="theme-toggle-btn" onclick="toggleTheme()" title="تبديل الوضع الليلي">
+        <i data-lucide="moon"></i>
+      </button>
+      
+      <!-- Admin Button -->
+      <button class="btn-admin" onclick="openAdmin()">لوحة التحكم</button>
+      
+      <!-- Cart Drawer Trigger Button -->
+      <div class="cart-btn" onclick="openCart()">
+        <i data-lucide="shopping-bag"></i>
+        <span>السلة</span>
+        <div class="cart-badge" id="cart-count">0</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow"><i data-lucide="sparkles" style="width:14px; height:14px"></i> تشكيلة ربيع وصيف ٢٠٢٦</p>
+      <h1 class="hero-title">أناقة<br><em>تُلهم</em><br>ثقة تتجلّى</h1>
+      <p class="hero-desc">أزياء تركية فاخرة ومحتشمة، صُممت خصيصاً للمحجبة العصرية التي تبحث عن الرقي والراحة في آن واحد.</p>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="goto('products')">تسوقي التشكيلة <i data-lucide="chevron-left"></i></button>
+        <button class="btn-outline" onclick="goto('about')">تعرفي علينا</button>
+      </div>
+    </div>
+    <div class="hero-img-side">
+      <img src="https://i.ibb.co/bjnJw6JS/6025966982219369438-1.jpg" alt="Noor Turkish Hijab Fashion" class="hero-img">
+      <div class="hero-badge">
+        <p>توصيل آمن وسريع</p>
+        <strong>داخل سوريا فقط 🌸</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEXT MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-inner">
+      <span>أزياء تركية أصيلة</span><span>خامات فاخرة</span><span>تصاميم محتشمة وحصرية</span>
+      <span>توصيل سريع لكل سوريا</span><span>موضة المحجبات الراقية</span><span>Noor.t.Turkish</span>
+      <span>أزياء تركية أصيلة</span><span>خامات فاخرة</span><span>تصاميم محتشمة وحصرية</span>
+      <span>توصيل سريع لكل سوريا</span><span>موضة المحجبات الراقية</span><span>Noor.t.Turkish</span>
+    </div>
+  </div>
+
+  <!-- PRODUCTS GRID SECTION -->
+  <section class="section" id="products">
+    <div class="sec-header">
+      <p class="sec-eyebrow">تشكيلتنا المختارة</p>
+      <h2 class="sec-title">المجموعة الجديدة</h2>
+    </div>
+    
+    <!-- Shopper Product Search & Filters -->
+    <div class="shop-filter-bar">
+      <div class="category-tabs">
+        <button class="cat-tab active" onclick="filterShopCategory('all', this)">الكل</button>
+        <button class="cat-tab" onclick="filterShopCategory('جديد', this)">جديد ✨</button>
+        <button class="cat-tab" onclick="filterShopCategory('الأكثر مبيعاً', this)">الأكثر مبيعاً 🔥</button>
+        <button class="cat-tab" onclick="filterShopCategory('تخفيض', this)">تخفيضات 🏷️</button>
+      </div>
+      <div class="shop-search-wrap">
+        <i data-lucide="search"></i>
+        <input type="text" id="shop-search-input" placeholder="ابحثي عن قطعة معينة..." oninput="filterShopSearch()">
+      </div>
+    </div>
+
+    <div class="products-grid" id="products-grid"></div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="about-strip" id="about">
+    <img src="https://i.ibb.co/C5VdHTdj/5800816318293853859.jpg" alt="Noor Shop Identity" class="about-img">
+    <div class="about-txt">
+      <p class="sec-eyebrow">قصتنا</p>
+      <h2 class="sec-title">نور — الأناقة من قلب إسطنبول</h2>
+      <p>نحن نؤمن بأن الحشمة لا تقلل من الجمال، بل تزيد من جاذبيته. نحن هنا لنوفر لكِ أرقى الأقمشة والتصاميم التركية الأصلية المختارة بعناية فائقة لتصلكِ أينما كنتِ في سوريا.</p>
+      <button class="btn-primary" style="margin-top:2.5rem; align-self:flex-start" onclick="goto('products')">ابدئي التسوق الآن <i data-lucide="chevron-left"></i></button>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="section features-bg" id="features">
+    <div class="sec-header">
+      <p class="sec-eyebrow">لماذا تختارين نور؟</p>
+      <h2 class="sec-title">خدماتنا المميزة</h2>
+    </div>
+    <div class="feats">
+      <div class="feat">
+        <div class="feat-icon-wrap"><i data-lucide="truck"></i></div>
+        <h3>توصيل لكافة المحافظات</h3>
+        <p>شحن آمن لدمشق وريفها وكافة المدن والمحافظات السورية.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon-wrap"><i data-lucide="check-square"></i></div>
+        <h3>جودة تركية مضمونة</h3>
+        <p>خامات تركية أصلية وتفصيل فخم يليق بأناقتكِ.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon-wrap"><i data-lucide="refresh-cw"></i></div>
+        <h3>سياسة استبدال مرنة</h3>
+        <p>استبدال سهل ومريح يضمن رضاكِ التام عن المقاس والخامة.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon-wrap"><i data-lucide="smile"></i></div>
+        <h3>دعم متواصل ومقاسات دقيقة</h3>
+        <p>مساعدة شخصية عبر واتساب لاختيار مقاسك المناسب تماماً.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="foot-brand">
+      <span class="foot-logo">Noor<span style="color:var(--rose)">.</span>T<span style="color:var(--rose)">.</span>Turkish</span>
+      <p>جمال وأناقة تركية راقية تصل من قلب إسطنبول إلى باب بيتكِ في سوريا.</p>
+    </div>
+    <div>
+      <h4>روابط سريعة</h4>
+      <ul>
+        <li><span onclick="goto('products')"><i data-lucide="chevron-left" style="width:12px"></i> المجموعة</span></li>
+        <li><span onclick="goto('about')"><i data-lucide="chevron-left" style="width:12px"></i> قصتنا</span></li>
+        <li><span onclick="goto('features')"><i data-lucide="chevron-left" style="width:12px"></i> خدماتنا</span></li>
+        <li><span onclick="openCart()"><i data-lucide="chevron-left" style="width:12px"></i> سلة المشتريات</span></li>
+      </ul>
+    </div>
+    <div>
+      <h4>خدمة العملاء</h4>
+      <ul>
+        <li><span onclick="toast('🌸 الاستبدال متاح خلال 48 ساعة من الاستلام')">سياسة الاستبدال</span></li>
+        <li><span onclick="toast('🚚 دمشق: 25,000 ل.س | الريف: 45,000 ل.س | المحافظات: حسب شركة الشحن')">تكاليف التوصيل</span></li>
+        <li><span onclick="toast('📏 تواصلي معنا عبر واتساب للمساعدة في اختيار المقاس المناسب')">دليل تحديد المقاس</span></li>
+        <li><span onclick="openCancelOrder()">إلغاء الطلب</span></li>
+      </ul>
+    </div>
+    <div>
+      <h4>تابعينا وتواصلي معنا</h4>
+      <ul>
+        <li><a href="https://instagram.com" target="_blank"><i data-lucide="instagram" style="width:14px"></i> انستقرام</a></li>
+        <li><span onclick="openWa()"><i data-lucide="message-circle" style="width:14px"></i> واتساب الدعم</span></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="foot-bottom">© 2026 Noor.t.Turkish — جميع الحقوق محفوظة | التوصيل داخل سوريا فقط</div>
+
+  <!-- PRODUCT QUICK VIEW OVERLAY -->
+  <div class="overlay" id="prod-overlay" onclick="closeProdModal(event)">
+    <div class="prod-modal">
+      <button class="modal-close-btn" onclick="closeProdModal()"><i data-lucide="x" style="width:16px; height:16px;"></i></button>
+      <div class="modal-gallery">
+        <img id="mod-img" src="" alt="Product View">
+        <button class="gal-arrow gal-prev" onclick="galNav(1)"><i data-lucide="chevron-right"></i></button>
+        <button class="gal-arrow gal-next" onclick="galNav(-1)"><i data-lucide="chevron-left"></i></button>
+        <div class="gal-nav" id="gal-dots"></div>
+      </div>
+      <div class="modal-body">
+        <h2 id="mod-name"></h2>
+        <p class="modal-price" id="mod-price"></p>
+        <p class="modal-desc" id="mod-desc"></p>
+        <div id="mod-sizes-wrap">
+          <p class="size-lbl">المقاسات المتوفرة</p>
+          <div class="sizes" id="mod-sizes"></div>
+        </div>
+        <button class="btn-primary" style="width:100%; margin-top:auto" onclick="addFromModal()">
+          أضيفي للسلة <i data-lucide="shopping-cart"></i>
+        </button>
+        
+        <div class="modal-share-row">
+          <button class="share-btn" onclick="shareProduct(curProd?.id)"><i data-lucide="share-2"></i> مشاركة الرابط</button>
+          <button class="share-btn" onclick="openProdRating(curProd?.id)"><i data-lucide="star"></i> تقييم القطعة</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE-OUT CART PANEL -->
+  <div class="cart-panel" id="cart-panel">
+    <div class="cart-head">
+      <h3><i data-lucide="shopping-bag" style="color:var(--rose)"></i> سلتي 🛍️</h3>
+      <button class="cart-x" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-body" id="cart-body"></div>
+    <div class="cart-foot">
+      <div class="cart-rows" id="cart-rows"></div>
+      <button class="cart-checkout" onclick="openCheckout()">
+        إتمام الطلب وتأكيد الشحن <i data-lucide="chevron-left"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL OVERLAY -->
+  <div class="overlay" id="co-overlay" onclick="closeCheckout(event)">
+    <div class="co-modal">
+      <button class="modal-close-btn" onclick="closeCheckout()"><i data-lucide="x" style="width:16px; height:16px;"></i></button>
+      <h2>تأكيد وشحن الطلب</h2>
+      <p class="co-sub">فضلاً أدخلي بياناتك بدقة وسنتواصل معكِ فوراً لتأكيد التوصيل.</p>
+      
+      <div class="fg">
+        <label>الاسم الكامل بالكامل *</label>
+        <input type="text" id="co-name" placeholder="مثال: ياسمين الشام">
+      </div>
+      <div class="fg">
+        <label>رقم الهاتف الفعال *</label>
+        <input type="tel" id="co-phone" placeholder="09XXXXXXXX">
+      </div>
+      <div class="fg">
+        <label>منطقة التوصيل *</label>
+        <select id="co-zone" onchange="zoneChanged()">
+          <option value="">— اختاري المنطقة —</option>
+          <option value="damascus">دمشق</option>
+          <option value="rural">ريف دمشق</option>
+          <option value="govs">شحن للمحافظات السورية</option>
+        </select>
+      </div>
+      
+      <!-- Shipping company choices (for govs) -->
+      <div class="ship-choice" id="ship-choice">
+        <label>شركة الشحن المفضلة لديكِ</label>
+        <div class="ship-opts">
+          <div class="ship-opt on" id="ship-qadmus" onclick="selShip('qadmus')">🚛 شركة قدموس</div>
+          <div class="ship-opt" id="ship-haram" onclick="selShip('haram')">🚛 شركة الهرم (مسارات)</div>
+        </div>
+      </div>
+      
+      <div class="delivery-note" id="co-del-note" style="display:none"></div>
+      
+      <div class="fg">
+        <label>العنوان بالتفصيل *</label>
+        <textarea id="co-addr" placeholder="مثال: دمشق، المزة، شارع الجلاء، بناء رقم 10، الطابق الثالث..."></textarea>
+      </div>
+      <div class="fg">
+        <label>ملاحظات إضافية مع الطلب (اختياري)</label>
+        <input type="text" id="co-notes" placeholder="مثال: يرجى الاتصال قبل التسليم بنصف ساعة">
+      </div>
+      
+      <div class="order-sum" id="co-sum"></div>
+      
+      <div class="co-actions">
+        <button class="btn-confirm" onclick="confirmOrder()">تأكيد وطلب الشراء ✓</button>
+        <button class="btn-back-co" onclick="closeCheckout()">رجوع للمتجر</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORDER SUCCESS OVERLAY -->
+  <div class="overlay" id="success-overlay">
+    <div class="success-box">
+      <div class="s-icon">🌸</div>
+      <h2>تم استلام طلبكِ بنجاح!</h2>
+      <p>شكراً لثقتكِ بمتجر نور. سيقوم فريقنا بمراجعة طلبكِ والتواصل معكِ خلال ساعات قليلة لتأكيد الشحن.</p>
+      <div class="order-num" id="success-num"></div>
+      <p style="font-size:0.8rem; color:var(--muted)">يرجى تصوير أو الاحتفاظ برقم الطلب للمتابعة لاحقاً</p>
+      
+      <button class="btn-primary" style="margin-top:2rem; width:100%" onclick="closeSuccess()">
+        متابعة التصفح والتسوق <i data-lucide="shopping-bag"></i>
+      </button>
+      <button class="share-btn" style="margin-top:0.6rem; width:100%" onclick="closeSuccess(); openCancelOrder()">
+        إلغاء الطلب (متاح خلال ساعتين فقط)
+      </button>
+      <button class="share-btn" style="margin-top:0.4rem; width:100%" onclick="closeSuccess(); setTimeout(openRating, 300)">
+        ⭐ قيّمي تجربتكِ معنا
+      </button>
+    </div>
+  </div>
+
+  <!-- ADMIN REDESIGNED FULLSCREEN DASHBOARD OVERLAY -->
+  <div class="overlay" id="admin-overlay" onclick="closeAdminOv(event)">
+    <div class="admin-box">
+      <div class="admin-head">
+        <h2><i data-lucide="shield-check"></i> لوحة تحكم نور 🌸</h2>
+        <button onclick="closeAdmin()"><i data-lucide="x"></i></button>
+      </div>
+      
+      <!-- Login Section -->
+      <div id="admin-login-area" class="admin-login-box">
+        <h3>دخول الإدارة</h3>
+        <p>هذه الواجهة مخصصة لإدارة المتجر ومتابعة الطلبات</p>
+        <div class="fg">
+          <label>البريد الإلكتروني للوحة</label>
+          <input type="email" id="a-email" placeholder="admin@noorturk.com" onkeydown="if(event.key==='Enter')checkLogin()">
+        </div>
+        <div class="fg">
+          <label>كلمة السر المشفرة</label>
+          <input type="password" id="a-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkLogin()">
+        </div>
+        <button class="btn-login" onclick="checkLogin()">دخول لوحة التحكم <i data-lucide="unlock"></i></button>
+        <p class="login-err" id="login-err"></p>
+      </div>
+      
+      <!-- Dashboard Core Section -->
+      <div id="admin-panel-area" style="display:none">
+        <div class="admin-dashboard-layout">
+          
+          <!-- Dashboard Sidebar Navigation -->
+          <div class="admin-sidebar">
+            <button class="a-tab on" onclick="aTab('add', this)">
+              <i data-lucide="plus-circle"></i> إضافة قطعة
+            </button>
+            <button class="a-tab" onclick="aTab('prods', this)">
+              <i data-lucide="package"></i> معروضات المتجر
+            </button>
+            <button class="a-tab" onclick="aTab('orders', this)">
+              <i data-lucide="shopping-cart"></i> سجل الطلبات
+            </button>
+            <button class="a-tab" onclick="aTab('ratings', this)">
+              <i data-lucide="star"></i> تقييمات الزبائن
+            </button>
+            <button class="a-tab" onclick="handleLogout()" style="margin-top: auto; color:#c0706a">
+              <i data-lucide="log-out"></i> تسجيل الخروج
+            </button>
+          </div>
+          
+          <!-- Dashboard Content -->
+          <div class="admin-main-content">
+            <!-- STATS CARDS -->
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-info">
+                  <h5>إجمالي المبيعات</h5>
+                  <h3 id="stat-sales">—</h3>
+                </div>
+                <div class="stat-icon"><i data-lucide="coins"></i></div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-info">
+                  <h5>عدد الطلبات</h5>
+                  <h3 id="stat-orders">—</h3>
+                </div>
+                <div class="stat-icon"><i data-lucide="shopping-cart"></i></div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-info">
+                  <h5>القطع المعروضة</h5>
+                  <h3 id="stat-products">—</h3>
+                </div>
+                <div class="stat-icon"><i data-lucide="package"></i></div>
+              </div>
+              <div class="stat-card" style="grid-column: 1 / -1; margin-top:-0.5rem; justify-content:center; gap:1.5rem">
+                <div class="stat-info" style="text-align:center">
+                  <h5>متوسط تقييم المتجر</h5>
+                  <h3 id="stat-rating" style="color:var(--gold); font-size:2rem; margin-top:0.4rem">— ★</h3>
+                </div>
+              </div>
+            </div>
+            
+            <!-- TAB 1: ADD PRODUCT -->
+            <div class="a-sec on" id="a-add">
+              <h3 style="margin-bottom:1.5rem; font-family:'Cormorant Garamond',serif">إضافة قطعة جديدة</h3>
+              <div class="admin-form-grid">
+                <div class="afg">
+                  <label>اسم القطعة / الموديل *</label>
+                  <input type="text" id="a-name" placeholder="مثال: عباءة السحر التركية">
+                </div>
+                <div class="afg">
+                  <label>السعر الأصلي (ل.س) *</label>
+                  <input type="text" id="a-price" placeholder="مثال: 180,000 ل.س">
+                </div>
+                <div class="afg">
+                  <label>نسبة الخصم % (اختياري)</label>
+                  <input type="number" id="a-discount" placeholder="مثال: 10 (يعني خصم 10%)" min="0" max="99">
+                </div>
+                <div class="afg">
+                  <label>علامة تصنيف القطعة</label>
+                  <select id="a-tag">
+                    <option value="">بدون تصنيف</option>
+                    <option value="جديد">جديد</option>
+                    <option value="الأكثر مبيعاً">الأكثر مبيعاً</option>
+                    <option value="تخفيض">تخفيض</option>
+                  </select>
+                </div>
+                <div class="afg admin-form-full">
+                  <label>وصف القطعة (القماش، الموديل، التفاصيل)</label>
+                  <textarea id="a-desc" placeholder="يرجى كتابة معلومات القماش والقياس..."></textarea>
+                </div>
+                
+                <!-- SIZES SYSTEM -->
+                <div class="afg admin-form-full">
+                  <label>تحديد القياسات المتوفرة للقطعة</label>
+                  <div class="sizes-admin-wrap" id="new-sizes-wrap"></div>
+                  <div class="sz-add-row" style="max-width: 320px">
+                    <input type="text" id="new-sz-input" placeholder="مثال: S, M, L, XL, 42" onkeydown="if(event.key==='Enter'){event.preventDefault(); addNewSize()}">
+                    <button type="button" onclick="addNewSize()">إضافة مقاس</button>
+                  </div>
+                  <p class="hint">اضغطي Enter أو زر الإضافة بعد كتابة كل مقاس لإضافته للقطعة.</p>
+                </div>
+                
+                <!-- IMAGES SYSTEM -->
+                <div class="afg admin-form-full">
+                  <label>صور المعاينة (PNG, JPG) *</label>
+                  <div class="img-upload-area">
+                    <i data-lucide="upload-cloud"></i>
+                    <p>اضغطي هنا لرفع صور القطعة من جهازك<br><small>أول صورة يتم رفعها ستظهر كغلاف أساسي في المتجر</small></p>
+                    <input type="file" id="a-img-input" accept="image/*" multiple onchange="handleImgs(this)">
+                  </div>
+                  <div class="img-preview-wrap" id="a-img-preview"></div>
+                </div>
+              </div>
+              
+              <button class="a-save" onclick="addProd()">نشر القطعة بالمعرض ✓</button>
+            </div>
+            
+            <!-- TAB 2: PRODUCTS LIST -->
+            <div class="a-sec" id="a-prods">
+              <h3 style="margin-bottom:1.5rem; font-family:'Cormorant Garamond',serif">إدارة المعروضات الحالية</h3>
+              <div class="search-filter-row">
+                <div class="search-input-wrap">
+                  <i data-lucide="search"></i>
+                  <input type="text" id="search-prods-input" placeholder="ابحثي عن منتج بالاسم..." oninput="filterProductsAdmin()">
+                </div>
+                <select id="filter-prods-stock" class="filter-select" onchange="filterProductsAdmin()">
+                  <option value="all">كل المعروضات</option>
+                  <option value="instock">المتوفر بالمخزن</option>
+                  <option value="oos">نفذت الكمية</option>
+                </select>
+              </div>
+              <div id="a-prods-list"></div>
+            </div>
+            
+            <!-- TAB 3: ORDERS LIST -->
+            <div class="a-sec" id="a-orders">
+              <h3 style="margin-bottom:1.5rem; font-family:'Cormorant Garamond',serif">لوحة إدارة الطلبات</h3>
+              <div class="search-filter-row">
+                <div class="search-input-wrap">
+                  <i data-lucide="search"></i>
+                  <input type="text" id="search-orders-input" placeholder="ابحثي بالاسم، الهاتف، أو رقم الطلب..." oninput="filterOrdersAdmin()">
+                </div>
+                <select id="filter-orders-status" class="filter-select" onchange="filterOrdersAdmin()">
+                  <option value="all">كل الطلبات</option>
+                  <option value="new">طلبات جديدة</option>
+                  <option value="confirmed">طلبات مؤكدة</option>
+                  <option value="cancelled">طلبات ملغاة</option>
+                </select>
+              </div>
+              <div id="a-orders-list"></div>
+            </div>
+            
+            <!-- TAB 4: REVIEW FEEDBACKS -->
+            <div class="a-sec" id="a-ratings">
+              <h3 style="margin-bottom:1.5rem; font-family:'Cormorant Garamond',serif">تقييمات وآراء زبونات متجر نور</h3>
+              <div id="a-ratings-list"></div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLIENT RATE WEBSITE OVERLAY -->
+  <div class="overlay" id="rating-overlay" onclick="closeRating(event)">
+    <div class="rating-box">
+      <button class="modal-close-btn" onclick="closeRating()"><i data-lucide="x" style="width:16px; height:16px;"></i></button>
+      <h3>قيّمي تجربتكِ معنا 🌸</h3>
+      <p>رأيكِ الغالي يهمنا لنطور متجرنا ونقدم لكِ دائماً أفضل جودة وخدمة.</p>
+      <div class="stars-wrap">
+        <button class="star-btn" onclick="setRating(5)">★</button>
+        <button class="star-btn" onclick="setRating(4)">★</button>
+        <button class="star-btn" onclick="setRating(3)">★</button>
+        <button class="star-btn" onclick="setRating(2)">★</button>
+        <button class="star-btn" onclick="setRating(1)">★</button>
+      </div>
+      <div class="fg">
+        <textarea id="rating-comment" rows="3" placeholder="شاركينا تعليقكِ أو ملاحظاتكِ هنا (اختياري)..."></textarea>
+      </div>
+      <button class="btn-primary" style="width:100%" onclick="submitRating()">إرسال التقييم للمتجر</button>
+    </div>
+  </div>
+
+  <!-- CLIENT RATE PRODUCT OVERLAY -->
+  <div class="overlay" id="prod-rating-overlay" onclick="closeProdRating(event)">
+    <div class="prod-rating-box">
+      <button class="modal-close-btn" onclick="closeProdRating()"><i data-lucide="x" style="width:16px; height:16px;"></i></button>
+      <h3>تقييم القطعة ⭐</h3>
+      <p>شاركي رأيكِ في جودة وخامة هذه القطعة لمساعدة المتسوقات الأخريات.</p>
+      <div class="fg">
+        <label>اسمكِ (اختياري)</label>
+        <input id="prod-rating-name" placeholder="مثال: رنا">
+      </div>
+      <div class="stars-wrap">
+        <button class="prod-star-btn" onclick="setProdRating(5)">★</button>
+        <button class="prod-star-btn" onclick="setProdRating(4)">★</button>
+        <button class="prod-star-btn" onclick="setProdRating(3)">★</button>
+        <button class="prod-star-btn" onclick="setProdRating(2)">★</button>
+        <button class="prod-star-btn" onclick="setProdRating(1)">★</button>
+      </div>
+      <div class="fg">
+        <textarea id="prod-rating-comment" rows="3" placeholder="ما رأيكِ بالقماش، التفصيل، والمظهر العام للقطعة؟..."></textarea>
+      </div>
+      <button class="btn-primary" style="width:100%" onclick="submitProdRating()">إرسال تقييم القطعة</button>
+    </div>
+  </div>
+
+  <!-- CLIENT CANCEL ORDER OVERLAY -->
+  <div class="overlay" id="cancel-overlay" onclick="closeCancelOrder(event)">
+    <div class="cancel-box">
+      <button class="modal-close-btn" onclick="closeCancelOrder()"><i data-lucide="x" style="width:16px; height:16px;"></i></button>
+      <h3>إلغاء الطلب</h3>
+      <p>يرجى العلم أن إلغاء الطلب متاح فقط خلال أول ساعتين من إرساله. أدخلي معلومات الطلب للتأكيد:</p>
+      <div class="fg">
+        <label>رقم الطلب الخاص بكِ *</label>
+        <input id="cancel-oid" placeholder="مثال: NR-123456">
+      </div>
+      <div class="fg">
+        <label>رقم الهاتف المرفق بالطلب *</label>
+        <input id="cancel-phone" placeholder="09XXXXXXXX">
+      </div>
+      <button class="btn-primary" style="width:100%; background:#c0706a;" onclick="submitCancelOrder()">تأكيد إلغاء الطلب</button>
+    </div>
+  </div>
+
+  <!-- WHATSAPP FLOATING FLOATER -->
+  <button class="wa-fab" onclick="openWa()" title="تواصلي معنا عبر واتساب">
+    <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+      <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+    </svg>
+  </button>
+
+  <!-- TOAST FEEDBACK NOTIFICATION -->
+  <div class="toast" id="toast-el">
+    <i data-lucide="check-circle" id="toast-icon"></i>
+    <span id="toast-txt"></span>
+  </div>
+
+  <!-- Application Logic (Linked at the bottom) -->
+  <script src="app.js"></script>
+</body>
+</html>
